@@ -17,7 +17,5 @@ public class Main {
         queue.poll();
 
         System.out.println(queue);
-
-
     }
 }
