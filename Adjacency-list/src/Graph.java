@@ -35,6 +35,5 @@ public class Graph {
                 System.out.print(node.data + " -> ");
             System.out.println();
         }
-
     }
 }
