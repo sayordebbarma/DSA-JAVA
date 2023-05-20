@@ -42,17 +42,51 @@ public class BinarySearchTree {
     }
 
     public void remove(int data) {
+        if (search(data))
+            removeHelper(root, data);
+        else
+            System.out.println(data + " could not be found");
     }
 
     public Node removeHelper(Node root, int data) {
+        if (root == null)
+            return root;
+        else if (data < root.data) {
+            root.left = removeHelper(root.left, data);
+        }
+        else if (data > root.data) {
+            root.right = removeHelper(root.right, data);
+        }
+        else { //node found
+            if (root.left == null && root.right ==null)
+                root = null;
+            else if (root.right != null) { //find the successor to replace this node
+                root.data = successor(root);
+                root.right = removeHelper(root.right, root.data);
+            }
+            else { //find the predecessor to replace this node
+                root.data = predecessor(root);
+                root.left = removeHelper(root.left, root.data);
+            }
+        }
         return null;
     }
 
+    //find the least value below the right child of this root node right
     public int successor(Node root) {
-        return 0;
+        root = root.right;
+        while (root.left != null)
+            root = root.left;
+
+        return root.data;
     }
 
-    public int predeccessor(Node root) {
-        return 0;
+    //find the greatest value below the right child of this root node right
+    public int predecessor(Node root) {
+        root = root.left;
+        while (root.right != null)
+            root = root.right;
+
+        return root.data;
     }
 }
